@@ -26,31 +26,62 @@ function square_number(x)
 end 
 ```
 ## Problem 1.2
-```julia 
-"We can see that the square of 5 is `j square_number(5)`."
+We can see that the square of 5 is `j square_number(5)`.
 
-```
 ## Problem 1.3
 ```julia
 
-pkg.plot
 f = square_number
 using Plots
-
-plot(f,-10,10)
+plot(f,-10,10, label ="square values")
 ```
 # Problem 2
 
 ## Problem 2.1
+The true ``sqrt(x)`` must lie between the estimate and x divided by the estimate,
+because if the estimate is too large or small the corresponding value of x will be too small or large
+(since the square root would need to be perfectly in the middle of this range). 
+Thus, the true value will be somewhere in the middle, and although it will never be exactly met,
+it will converge to the value and be very close. 
+
 
 ## Problem 2.2
-
+```julia
+function newt(x)
+  tol=100
+  while tol>=0.01
+    a=x/2
+    b=x/a
+    a=(b+a)/2
+    tol = abs(a-sqrt(x))
+  end
+  print
+end
+```
 # Problem 3
 
 ## Problem 3.1
-
+```julia
+v = rand(20)
+```
 ## Problem 3.2
+```julia
+function mean(vect)
+  i = 1
+  avg=0
+  for i in 1:length(vect)
+    avg=avg+vect(i)
+  end
+  avg = avg/(length(vect))
+end
 
+function demean(vect)
+  i = 1
+  for i in 1:length(vect)
+  vect[i] -= mean(vect)
+  end 
+end 
+```
 ## Problem 3.3
 
 ## Problem 3.4
