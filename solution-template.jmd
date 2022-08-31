@@ -57,6 +57,8 @@ function newt(x)
   end
   print
 end
+
+sqrt(2)
 ```
 # Problem 3
 
@@ -83,17 +85,54 @@ function demean(vect)
 end 
 ```
 ## Problem 3.3
+```julia
+v=[0,0,1,1,1,1,1,1,0,0]
 
+```
 ## Problem 3.4
+```julia
+g=rand(5,5)
 
+for i in 1:5
+  r=mean(g(:,1))
+  g(:,i)=(g(:,i)-r
+end
+```
 # Problem 4
 
 ## Problem 4.1
+```julia
+import Pkg
+Pkg.activate(".")
+Pkg.instantiate()
+using Distributions
 
+my_lognorm_dist = lognormal(log(0.03),0.05)
+y=rand(my_lognorm_dist, 100)
+
+```
 ## Problem 4.2
+```julia
 
+function phos(s,a,y,b,q,t)
+  for i in 1:t
+    x(i)= s+a+y+((x^q)/(1+x^q))-(b*x)
+  end
+  return x
+end
+
+```
 ## Problem 4.3
+```julia 
+a=0.4
+q=2
+b=0.42
+t=100
+x=phos(s,a,y,b,q,t)
 
+using Plots
+plot(x)
+```
 # References
 
 ```julia
