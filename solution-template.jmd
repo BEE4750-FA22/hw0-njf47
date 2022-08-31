@@ -68,20 +68,21 @@ v = rand(20)
 ```
 ## Problem 3.2
 ```julia
-function mean(vect)
-  i = 1
+function mean(v)
   avg=0
-  for i in 1:length(vect)
-    avg=avg+vect(i)
+  for i in 1:length(v)
+    avg=avg+v[i]
   end
-  avg = avg/(length(vect))
+  avg = avg/(length(v))
+  return avg
 end
 
-function demean(vect)
+function demean!(v)
   i = 1
-  for i in 1:length(vect)
-  vect[i] -= mean(vect)
+  for i in 1:length(v)
+  v[i] -= mean(v)
   end 
+  return v
 end 
 ```
 ## Problem 3.3
@@ -94,44 +95,50 @@ v=[0,0,1,1,1,1,1,1,0,0]
 g=rand(5,5)
 
 for i in 1:5
-  r=mean(g(:,1))
-  g(:,i)=(g(:,i)-r
+  r=mean(g[:,1])
+  g[:,i]=g[:,i].-r
 end
 ```
 # Problem 4
 
 ## Problem 4.1
 ```julia
-import Pkg
+import Pkg; Pkg.add("Distributions")
 Pkg.activate(".")
 Pkg.instantiate()
 using Distributions
 
-my_lognorm_dist = lognormal(log(0.03),0.05)
+my_lognorm_dist = LogNormal(log(0.03),0.005)
 y=rand(my_lognorm_dist, 100)
 
 ```
 ## Problem 4.2
 ```julia
 
-function phos(s,a,y,b,q,t)
-  for i in 1:t
-    x(i)= s+a+y+((x^q)/(1+x^q))-(b*x)
+function phos(a,y_t,b,q,T,x_0)
+  x_t=zeros(T)
+  for n in eachindex(x_t)
+    if n == 1
+      x_t[n] = x_0
+    else
+      x_t[n]=x_t[n-1]+a+y_t[n]+((x_t[n-1]^q)/(1+(x_t[n-1]^q))) - b*x_t[n-1]
+    end
   end
-  return x
+  return x_t
 end
 
 ```
 ## Problem 4.3
 ```julia 
+using Plots
 a=0.4
 q=2
 b=0.42
-t=100
-x=phos(s,a,y,b,q,t)
+T=100
 
-using Plots
-plot(x)
+x = LinRange(1,100,100)
+y=phos(0.4,y,0.42,2,100,0)
+plot(x,y, xlabel="Phosphorus Levels")
 ```
 # References
 
