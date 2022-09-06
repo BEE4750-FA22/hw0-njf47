@@ -59,6 +59,7 @@ function newt(x)
 end
 
 sqrt(2)
+h=newt(9)
 ```
 # Problem 3
 
